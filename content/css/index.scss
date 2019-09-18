@@ -1,0 +1,25 @@
+/**
+ * Import any reveal.js theme or your own.
+ **/
+ @import '~@irontec/reveal.js-theme/dist/theme.css';
+
+.intro {
+    background-image: url('../assets/media/fondo_presentacion.jpg');
+    img {
+        border:0 !important;
+        box-shadow: none !important;
+        background: rgba(255,255,255,0)!important;
+    }
+}
+img {
+    border:0 !important;
+    box-shadow: none !important;
+    background: rgba(255,255,255,0)!important;
+    font-family: inherit!important;
+    width: inherit!important;
+    height: inherit!important;
+}
+
+strong {
+    font-weight:bold!important;
+}

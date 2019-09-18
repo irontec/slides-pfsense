@@ -1,0 +1,55 @@
+{
+  "title": "pfSense",
+  "og_url": " https://irontec.github.io/slides-pfsense",
+  "og_image": "https://irontec.github.io/slides-mysql/media/logo-mysql.svg",
+  "options": {
+    "controls": true,
+    "progress": true,
+    "history": true,
+    "center": true,
+    "slideNumber": true,
+    "touch": true,
+    "hideAddressBar": true,
+    "mouseWheel": true,
+    "menu": {
+      "openButton": false
+    }
+  },
+  "plugins": {
+    "search": true,
+    "zoom":   true,
+    "menu":   true,
+    "notes":  true,
+    "highlightjs": true,
+    "ga": false
+  },
+  "serviceWorker": true,
+  "slides": [
+    {"path": "index.md", "attrs": {"class":"intro"}},
+    ["intro/*.md"],
+    ["instalacion/*.md"],
+    "configuracion/000.md",
+    ["configuracion/advanced/00*.md"],
+    [
+      "configuracion/advanced/02*.md",
+      "configuracion/advanced/03*.md",
+      "configuracion/advanced/04*.md",
+      "configuracion/advanced/05*.md"
+    ],
+    ["configuracion/users/*.md"],
+    ["interfaces/*.md"],
+    ["firewall/*.md"],
+    ["servicios/*.md"],
+    ["comandos/*.md"],
+    ["cron/*.md"],
+    ["squid/*.md"],
+    ["haproxy/*.md"],
+    ["acme/*.md"],
+    ["pfblockerng/*.md"],
+    ["multi-wan/*.md"],
+    ["ha/*.md"],
+    ["traffic_shaper/*.md"],
+    ["documentacion/*.md"],
+    "end.md"
+  ]
+}
