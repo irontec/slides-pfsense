@@ -10,8 +10,6 @@
 
 Vas a necesitar, como dependencias, al menos los siguientes paquetes:
 * [npm](https://www.npmjs.com/)
-* [bower](https://bower.io/)
-* [grunt](https://gruntjs.com/)
 
 
 ## Pasos para editar las transparencias
@@ -22,17 +20,20 @@ Los comandos a ejecutar una vez hecho el clone:
 ```
 npm install
 
-bower install
+npm start
 
-grunt serve
 ```
 
 ### Para subir al repositorio
-Existe una tarea dentro de **Gruntfile.coffee** que realiza los pasos para subirl las transparencias a github
+
 
 ```
-grunt deploy
+npm run build
+
+npm deploy:gh
+
 ```
+
 
 
 ## Trucos
@@ -43,4 +44,9 @@ Existen varios atajos de teclado que nos facilitan las cosas:
 * **m**: como hemos añadido el plugin de menú, nos abre el menú
 
 ### Imprimir
-Para poder imprimir las transparencias tendremos que añadir **?print-pdf** en la URL. Ejemplo con la URL de  Github: https://irontec.github.io/slides-pfsense/?print-pdf
+
+``` 
+npm run create:pdf
+```
+
+* [descargar PDF](https://irontec.github.io/slides-pfsense/pfsense-slides.pdf)
