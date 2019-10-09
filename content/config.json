@@ -1,7 +1,7 @@
 {
   "title": "pfSense",
   "og_url": " https://irontec.github.io/slides-pfsense",
-  "og_image": "https://irontec.github.io/slides-mysql/media/logo-mysql.svg",
+  "og_image": "https://irontec.github.io/slides-pfsense/media/resources/pfSenseBWlogo.png ",
   "options": {
     "controls": true,
     "progress": true,

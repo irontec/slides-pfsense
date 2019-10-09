@@ -26,8 +26,8 @@ function prepareSlide(slide) {
   }
 
   const isMd = slidePath.endsWith('.md');
+  const content = context(slidePath).default;
 
-  const content = context(slidePath);
   if (isMd) {
       return `<section data-markdown${resolveAttrs(attrs)}><textarea data-template>${content}</textarea></section>`;
   } else {

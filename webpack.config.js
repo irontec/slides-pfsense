@@ -5,9 +5,9 @@ const webpack = require("webpack"),
   cheerio = require("cheerio"),
   HtmlWebpackPlugin = require("html-webpack-plugin"),
   CopyWebpackPlugin = require("copy-webpack-plugin"),
-  CleanWebpackPlugin = require('clean-webpack-plugin'),
+  { CleanWebpackPlugin } = require('clean-webpack-plugin'),
   BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin,
-  UglifyJsPlugin = require("uglifyjs-webpack-plugin"),
+  TerserPlugin = require('terser-webpack-plugin'),
   MiniCssExtractPlugin = require("mini-css-extract-plugin"),
   ImageminPlugin = require("imagemin-webpack-plugin").default,
   GenerateSW = require('workbox-webpack-plugin').GenerateSW;
@@ -39,7 +39,7 @@ module.exports = {
   },
   plugins: [
     // new BundleAnalyzerPlugin(),
-    new CleanWebpackPlugin(DIST, { verbose:  true}),
+    new CleanWebpackPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     // Make every directoy on /content/assets available directly on the slides
     // /content/assets/pics/im.png >> pics/im.png
@@ -143,7 +143,7 @@ module.exports = {
                   "@babel/preset-env",
                   {
                     targets: {
-                      browsers: ["last 2 versions"]
+                      browsers: ["last 1 versions"]
                     },
                     modules: false // Needed for tree shaking to work.
                   }
@@ -221,25 +221,26 @@ module.exports = {
   },
   optimization: {
     moduleIds: "size",
+    minimize: true,
     minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          warnings: false,
-          mangle: true, // Note `mangle.properties` is `false` by default.
-          ie8: false,
-          keep_fnames: false
-        },
+      new TerserPlugin({
         extractComments: {
-          condition: /^\**!|@preserve|Copyright|@license|@cc_on/i,
-          filename(file) {
-            return `3rd.party.LICENSES`;
+          condition: /^\**!|@preserve|@license|@cc_on/i,
+          filename: (file, fileData) => {
+            // A file can contain a query string (for example when you have `output.filename: '[name].js?[chunkhash]'`)
+            // You must consider this
+            // The "fileData" argument contains object with "filename", "basename", "query"
+            return file.replace(/\.(\w+)($|\?)/, '.$1.LICENSE$2');
           },
-          banner(licenseFile) {
-            return `Licenses found in ${licenseFile}`;
-          }
-        }
-      })
-    ]
+          banner: (licenseFile) => {
+            return `License information can be found in ${licenseFile}`;
+          },
+        },
+        sourceMap: false,
+        parallel: true,
+        cache: true,
+      }),
+    ],
   },
   resolve: {
     alias: {},
@@ -267,6 +268,8 @@ function resolveUsedLanguages(path) {
         });
       }
       return acc;
-    }, [])
+    },
+    // Initialize with imposible file name, so ContextReplacementPlugin preload any file inside the bundle if no language is used
+    ['^$'])
   )];
 }
