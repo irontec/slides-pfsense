@@ -64,7 +64,7 @@
     "highlight.js": "^9.15.10",
     "jquery": "^3.4.1",
     "reveal-ga": "github:jabiinfante/reveal-ga#fix/remove_deps",
-    "reveal.js": "^3.8.0",
+    "reveal.js": "^4.3.0",
     "reveal.js-menu": "^1.2.0"
   }
 }
